@@ -5,7 +5,7 @@
 Single-page landing website for **Ravynix**, the music brand of artist **Yevheniy**.
 
 **Primary Goal:** Professional presence + business inquiries  
-**Contact:** yevheniy@ravynix.com
+**Contact:** ravynix@gmail.com
 
 ---
 
@@ -88,7 +88,7 @@ direction in-house.
 ### Contact
 ```
 For business inquiries, licensing, collaborations, or press:
-yevheniy@ravynix.com
+ravynix@gmail.com
 ```
 
 ### Footer

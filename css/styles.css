@@ -648,18 +648,26 @@ button {
     margin-bottom: var(--space-4);
 }
 
-.contact-email {
-    display: inline-block;
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-medium);
+.contact-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3) var(--space-8);
+    background-color: var(--color-bg-elevated);
     color: var(--color-text-primary);
-    padding: var(--space-2) 0;
-    border-bottom: 1px solid transparent;
-    transition: border-color var(--transition-fast);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    transition: all var(--transition-base);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
-.contact-email:hover {
-    border-bottom-color: var(--color-text-primary);
+.contact-button:hover {
+    background-color: var(--color-hover);
+    border-color: var(--color-text-primary);
+    transform: translateY(-2px);
 }
 
 /* ============================================
@@ -839,10 +847,7 @@ button {
         font-size: var(--font-size-sm);
     }
     
-    .contact-email {
-        font-size: var(--font-size-lg);
-        word-break: break-all;
-    }
+
     
     .footer {
         padding: var(--space-10) 0;
@@ -931,9 +936,7 @@ button {
         font-size: var(--font-size-base);
     }
     
-    .contact-email {
-        font-size: var(--font-size-base);
-    }
+
 }
 
 /* Touch device optimizations */
