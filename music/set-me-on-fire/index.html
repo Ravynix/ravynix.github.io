@@ -262,6 +262,180 @@
             color: var(--color-text-primary);
         }
         
+        /* Audio Player */
+        .song-player {
+            background-color: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            margin-bottom: var(--space-10);
+        }
+        
+        .song-player-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+        
+        .song-play-button {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--color-text-primary);
+            color: var(--color-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            transition: transform var(--transition-fast), background-color var(--transition-fast);
+            flex-shrink: 0;
+        }
+        
+        .song-play-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .song-play-button:active {
+            transform: scale(0.95);
+        }
+        
+        .song-play-button .play-icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 2px;
+        }
+        
+        .song-play-button .pause-icon {
+            width: 20px;
+            height: 20px;
+            display: none;
+        }
+        
+        .song-player.is-playing .song-play-button .play-icon {
+            display: none;
+        }
+        
+        .song-player.is-playing .song-play-button .pause-icon {
+            display: block;
+        }
+        
+        .song-player-progress {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+        
+        .song-progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: var(--color-border);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .song-progress-filled {
+            height: 100%;
+            background-color: var(--color-text-primary);
+            width: 0%;
+            border-radius: 3px;
+            transition: width 0.1s linear;
+        }
+        
+        .song-progress-bar:hover .song-progress-filled {
+            background-color: #fff;
+        }
+        
+        .song-player-time {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .song-time-current,
+        .song-time-duration {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-tertiary);
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .song-player-volume {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+        
+        .song-volume-button {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+            transition: color var(--transition-fast);
+        }
+        
+        .song-volume-button:hover {
+            color: var(--color-text-primary);
+        }
+        
+        .song-volume-button .volume-icon,
+        .song-volume-button .mute-icon {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .song-volume-button .mute-icon {
+            display: none;
+        }
+        
+        .song-volume-button.is-muted .volume-icon {
+            display: none;
+        }
+        
+        .song-volume-button.is-muted .mute-icon {
+            display: block;
+        }
+        
+        .song-volume-slider {
+            width: 80px;
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--color-border);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        
+        .song-volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: var(--color-text-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform var(--transition-fast);
+        }
+        
+        .song-volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        
+        .song-volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: var(--color-text-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        
         /* Responsive */
         @media (max-width: 600px) {
             .song-hero {
@@ -281,6 +455,15 @@
             
             .song-hero-title {
                 font-size: var(--font-size-2xl);
+            }
+            
+            .song-player-volume {
+                display: none;
+            }
+            
+            .song-play-button {
+                width: 44px;
+                height: 44px;
             }
         }
     </style>
@@ -341,6 +524,43 @@
                         <a href="https://music.youtube.com/" class="platform-link" aria-label="Listen on YouTube Music" title="YouTube Music" target="_blank" rel="noopener">
                             <img src="../../assets/icons/youtube-music.png" alt="YouTube Music" class="platform-icon">
                         </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Audio Player -->
+            <div class="song-player" id="song-player">
+                <audio id="audio-player" preload="metadata">
+                    <source src="../../assets/audio/set-me-on-fire.wav" type="audio/wav">
+                </audio>
+                <div class="song-player-controls">
+                    <button class="song-play-button" aria-label="Play">
+                        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                        </svg>
+                    </button>
+                    <div class="song-player-progress">
+                        <div class="song-progress-bar">
+                            <div class="song-progress-filled"></div>
+                        </div>
+                        <div class="song-player-time">
+                            <span class="song-time-current">0:00</span>
+                            <span class="song-time-duration">0:00</span>
+                        </div>
+                    </div>
+                    <div class="song-player-volume">
+                        <button class="song-volume-button" aria-label="Mute">
+                            <svg class="volume-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                            </svg>
+                            <svg class="mute-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                            </svg>
+                        </button>
+                        <input type="range" class="song-volume-slider" min="0" max="1" step="0.1" value="1" aria-label="Volume">
                     </div>
                 </div>
             </div>
@@ -494,6 +714,89 @@ Oh baby tonight</pre>
                 lyricsContent.classList.toggle('is-visible', !isExpanded);
             });
         }
+        
+        // Audio Player
+        const songPlayer = document.getElementById('song-player');
+        const audio = document.getElementById('audio-player');
+        const playButton = songPlayer.querySelector('.song-play-button');
+        const progressBar = songPlayer.querySelector('.song-progress-bar');
+        const progressFilled = songPlayer.querySelector('.song-progress-filled');
+        const timeCurrent = songPlayer.querySelector('.song-time-current');
+        const timeDuration = songPlayer.querySelector('.song-time-duration');
+        const volumeButton = songPlayer.querySelector('.song-volume-button');
+        const volumeSlider = songPlayer.querySelector('.song-volume-slider');
+        
+        // Format time helper
+        function formatTime(seconds) {
+            if (isNaN(seconds) || !isFinite(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // Play/Pause
+        playButton.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                songPlayer.classList.add('is-playing');
+            } else {
+                audio.pause();
+                songPlayer.classList.remove('is-playing');
+            }
+        });
+        
+        // Update progress bar
+        audio.addEventListener('timeupdate', () => {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            progressFilled.style.width = `${percent}%`;
+            timeCurrent.textContent = formatTime(audio.currentTime);
+        });
+        
+        // Load duration
+        audio.addEventListener('loadedmetadata', () => {
+            timeDuration.textContent = formatTime(audio.duration);
+        });
+        
+        audio.addEventListener('canplay', () => {
+            if (audio.duration && !isNaN(audio.duration)) {
+                timeDuration.textContent = formatTime(audio.duration);
+            }
+        });
+        
+        // Seek on progress bar click
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = percent * audio.duration;
+        });
+        
+        // Audio ended
+        audio.addEventListener('ended', () => {
+            songPlayer.classList.remove('is-playing');
+            progressFilled.style.width = '0%';
+            audio.currentTime = 0;
+        });
+        
+        // Volume controls
+        let previousVolume = 1;
+        
+        volumeButton.addEventListener('click', () => {
+            if (audio.volume > 0) {
+                previousVolume = audio.volume;
+                audio.volume = 0;
+                volumeSlider.value = 0;
+                volumeButton.classList.add('is-muted');
+            } else {
+                audio.volume = previousVolume;
+                volumeSlider.value = previousVolume;
+                volumeButton.classList.remove('is-muted');
+            }
+        });
+        
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+            volumeButton.classList.toggle('is-muted', audio.volume === 0);
+        });
     </script>
 </body>
 </html>
