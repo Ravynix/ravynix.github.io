@@ -610,6 +610,25 @@ button {
     letter-spacing: 0.05em;
 }
 
+/* Info Link (for press/lyrics) */
+.info-link {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    margin-left: auto;
+}
+
+.info-link:hover {
+    color: var(--color-text-secondary);
+    border-color: var(--color-text-tertiary);
+}
+
 /* ============================================
    ABOUT SECTION
    ============================================ */
@@ -634,6 +653,15 @@ button {
     margin-bottom: 0;
 }
 
+/* Services availability note */
+.about-content .services-note {
+    color: var(--color-text-tertiary);
+    font-style: italic;
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--color-border-subtle);
+    margin-top: var(--space-6);
+}
+
 /* ============================================
    CONTACT SECTION
    ============================================ */
@@ -648,6 +676,36 @@ button {
     margin-bottom: var(--space-4);
 }
 
+/* Minimalistic email link */
+.contact-email {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-light);
+    color: var(--color-text-secondary);
+    letter-spacing: 0.02em;
+    transition: color var(--transition-fast);
+    position: relative;
+}
+
+.contact-email::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-text-primary);
+    transition: width var(--transition-base);
+}
+
+.contact-email:hover {
+    color: var(--color-text-primary);
+}
+
+.contact-email:hover::after {
+    width: 100%;
+}
+
+/* Legacy button style (kept for reference) */
 .contact-button {
     display: inline-flex;
     align-items: center;
