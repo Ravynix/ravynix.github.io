@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Butterfly — A new track by Ravynix. Listen now.">
+    <meta name="keywords" content="Ravynix, Butterfly, electronic, music, new release">
+    <meta name="author" content="Yevhenii">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Butterfly — Ravynix">
+    <meta property="og:description"
+        content="Listen to the new track 'Butterfly' by Ravynix.">
+    <meta property="og:type" content="music.song">
+    <meta property="og:url" content="https://ravynix.com/music/butterfly/">
+    <meta property="og:image" content="https://ravynix.com/assets/covers/butterfly.jpg">
+
+    <title>Butterfly — Ravynix</title>
+
+    <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Song Page Specific Styles */
+        .song-page {
+            min-height: 100vh;
+            padding-top: calc(var(--header-height) + var(--space-12));
+            padding-bottom: var(--space-16);
+        }
+
+        .song-page-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-8);
+            transition: color var(--transition-fast);
+        }
+
+        .back-link:hover {
+            color: var(--color-text-primary);
+        }
+
+        .back-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .song-hero {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: var(--space-8);
+            margin-bottom: var(--space-12);
+            align-items: start;
+        }
+
+        .song-hero-cover {
+            width: 200px;
+            height: 200px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .song-hero-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .song-hero-info {
+            padding-top: var(--space-2);
+        }
+
+        .song-hero-label {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-2);
+        }
+
+        .song-hero-title {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-2);
+            letter-spacing: -0.02em;
+        }
+
+        .song-hero-artist {
+            font-size: var(--font-size-lg);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-4);
+        }
+
+        .song-hero-meta {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-6);
+        }
+
+        .song-hero-platforms {
+            display: flex;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+        }
+
+        .song-hero-platforms .platform-link {
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-bg-card);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .song-hero-platforms .platform-icon {
+            width: 22px;
+            height: 22px;
+            filter: grayscale(100%);
+        }
+
+        .song-description {
+            margin-bottom: var(--space-10);
+        }
+
+        .song-description h2 {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-4);
+        }
+
+        .song-description p {
+            font-size: var(--font-size-base);
+            color: var(--color-text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+
+        .song-tags {
+            display: flex;
+            gap: var(--space-2);
+            flex-wrap: wrap;
+            margin-top: var(--space-4);
+        }
+
+        .song-tag {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-tertiary);
+            background-color: var(--color-bg-card);
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-sm);
+        }
+
+        /* Lyrics Section */
+        .lyrics-section {
+            border-top: 1px solid var(--color-border-subtle);
+            padding-top: var(--space-10);
+        }
+
+        .lyrics-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: var(--space-4) 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .lyrics-toggle h2 {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-tertiary);
+            transition: color var(--transition-fast);
+        }
+
+        .lyrics-toggle:hover h2 {
+            color: var(--color-text-secondary);
+        }
+
+        .lyrics-toggle-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--color-text-tertiary);
+            transition: transform var(--transition-base), color var(--transition-fast);
+        }
+
+        .lyrics-toggle:hover .lyrics-toggle-icon {
+            color: var(--color-text-secondary);
+        }
+
+        .lyrics-toggle[aria-expanded="true"] .lyrics-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .lyrics-content {
+            display: none;
+            padding-top: var(--space-4);
+        }
+
+        .lyrics-content.is-visible {
+            display: block;
+        }
+
+        .lyrics-content pre {
+            font-family: var(--font-family);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            line-height: var(--line-height-relaxed);
+            white-space: pre-wrap;
+        }
+
+        .lyrics-section-label {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-text-tertiary);
+            margin-top: var(--space-6);
+            margin-bottom: var(--space-3);
+            opacity: 0.6;
+        }
+
+        .lyrics-section-label:first-child {
+            margin-top: 0;
+        }
+
+        /* Press Contact */
+        .press-contact {
+            margin-top: var(--space-12);
+            padding-top: var(--space-8);
+            border-top: 1px solid var(--color-border-subtle);
+        }
+
+        .press-contact p {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-3);
+        }
+
+        .press-contact a {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            transition: color var(--transition-fast);
+        }
+
+        .press-contact a:hover {
+            color: var(--color-text-primary);
+        }
+
+        /* Audio Player */
+        .song-player {
+            background-color: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            margin-bottom: var(--space-10);
+        }
+
+        .song-player-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .song-play-button {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--color-text-primary);
+            color: var(--color-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            transition: transform var(--transition-fast), background-color var(--transition-fast);
+            flex-shrink: 0;
+        }
+
+        .song-play-button:hover {
+            transform: scale(1.05);
+        }
+
+        .song-play-button:active {
+            transform: scale(0.95);
+        }
+
+        .song-play-button .play-icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 2px;
+        }
+
+        .song-play-button .pause-icon {
+            width: 20px;
+            height: 20px;
+            display: none;
+        }
+
+        .song-player.is-playing .song-play-button .play-icon {
+            display: none;
+        }
+
+        .song-player.is-playing .song-play-button .pause-icon {
+            display: block;
+        }
+
+        .song-player-progress {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .song-progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: var(--color-border);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .song-progress-filled {
+            height: 100%;
+            background-color: var(--color-text-primary);
+            width: 0%;
+            border-radius: 3px;
+            transition: width 0.1s linear;
+        }
+
+        .song-progress-bar:hover .song-progress-filled {
+            background-color: #fff;
+        }
+
+        .song-player-time {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .song-time-current,
+        .song-time-duration {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-tertiary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .song-player-volume {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .song-volume-button {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+            transition: color var(--transition-fast);
+        }
+
+        .song-volume-button:hover {
+            color: var(--color-text-primary);
+        }
+
+        .song-volume-button .volume-icon,
+        .song-volume-button .mute-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        .song-volume-button .mute-icon {
+            display: none;
+        }
+
+        .song-volume-button.is-muted .volume-icon {
+            display: none;
+        }
+
+        .song-volume-button.is-muted .mute-icon {
+            display: block;
+        }
+
+        .song-volume-slider {
+            width: 80px;
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--color-border);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        .song-volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: var(--color-text-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform var(--transition-fast);
+        }
+
+        .song-volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .song-volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: var(--color-text-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .song-page {
+                padding-top: calc(var(--header-height) + var(--space-8));
+                padding-bottom: var(--space-12);
+            }
+
+            .back-link {
+                margin-bottom: var(--space-6);
+            }
+
+            .song-hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: var(--space-5);
+                margin-bottom: var(--space-8);
+            }
+
+            .song-hero-cover {
+                margin: 0 auto;
+                width: 200px;
+                height: 200px;
+            }
+
+            .song-hero-info {
+                padding-top: 0;
+            }
+
+            .song-hero-platforms {
+                justify-content: center;
+            }
+
+            .song-hero-title {
+                font-size: var(--font-size-2xl);
+            }
+
+            .song-hero-artist {
+                font-size: var(--font-size-base);
+            }
+
+            .song-hero-meta {
+                margin-bottom: var(--space-4);
+            }
+
+            /* Player tablet adjustments */
+            .song-player {
+                padding: var(--space-4);
+                margin-bottom: var(--space-8);
+            }
+
+            .song-player-controls {
+                gap: var(--space-3);
+            }
+
+            .song-play-button {
+                width: 44px;
+                height: 44px;
+            }
+
+            .song-play-button .play-icon,
+            .song-play-button .pause-icon {
+                width: 18px;
+                height: 18px;
+            }
+
+            .song-progress-bar {
+                height: 8px;
+                border-radius: 4px;
+            }
+
+            .song-volume-slider {
+                width: 60px;
+            }
+
+            /* Description & sections */
+            .song-description {
+                margin-bottom: var(--space-8);
+            }
+
+            .lyrics-section {
+                padding-top: var(--space-8);
+            }
+
+            .press-contact {
+                margin-top: var(--space-8);
+                padding-top: var(--space-6);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .song-page {
+                padding-top: calc(var(--header-height) + var(--space-6));
+            }
+
+            .song-hero-cover {
+                width: 160px;
+                height: 160px;
+            }
+
+            .song-hero-title {
+                font-size: var(--font-size-xl);
+            }
+
+            .song-hero-platforms .platform-link {
+                width: 36px;
+                height: 36px;
+            }
+
+            .song-hero-platforms .platform-icon {
+                width: 18px;
+                height: 18px;
+            }
+
+            /* Player mobile optimizations */
+            .song-player {
+                padding: var(--space-4);
+                border-radius: var(--radius-md);
+            }
+
+            .song-player-controls {
+                flex-wrap: wrap;
+                gap: var(--space-3);
+            }
+
+            .song-play-button {
+                width: 48px;
+                height: 48px;
+            }
+
+            .song-play-button .play-icon,
+            .song-play-button .pause-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .song-player-progress {
+                order: 2;
+                width: 100%;
+                flex: none;
+            }
+
+            .song-progress-bar {
+                height: 10px;
+                border-radius: 5px;
+            }
+
+            .song-player-volume {
+                display: none;
+            }
+
+            .song-player-time {
+                margin-top: var(--space-1);
+            }
+
+            /* Tags wrap better */
+            .song-tags {
+                justify-content: center;
+            }
+
+            /* Lyrics adjustments */
+            .lyrics-content pre {
+                font-size: var(--font-size-sm);
+                padding: 0 var(--space-2);
+            }
+
+            .lyrics-section-label {
+                margin-top: var(--space-5);
+            }
+        }
+
+        /* Touch-friendly adjustments */
+        @media (hover: none) and (pointer: coarse) {
+            .song-play-button {
+                min-width: 48px;
+                min-height: 48px;
+            }
+
+            .song-play-button:hover {
+                transform: none;
+            }
+
+            .song-play-button:active {
+                transform: scale(0.95);
+                background-color: rgba(255, 255, 255, 0.9);
+            }
+
+            .song-progress-bar {
+                height: 12px;
+                border-radius: 6px;
+            }
+
+            .song-progress-bar:hover .song-progress-filled {
+                background-color: var(--color-text-primary);
+            }
+
+            .song-hero-platforms .platform-link {
+                min-width: 44px;
+                min-height: 44px;
+            }
+
+            .song-hero-platforms .platform-link:hover {
+                background-color: transparent;
+            }
+
+            .song-hero-platforms .platform-link:active {
+                background-color: var(--color-hover);
+            }
+
+            .lyrics-toggle {
+                padding: var(--space-5) 0;
+            }
+
+            .back-link {
+                padding: var(--space-2) 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../../" class="logo">
+                <img src="../../assets/images/ravynix-no-bg.png" alt="Ravynix" class="logo-image">
+            </a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="../../#music" class="nav-link">Music</a></li>
+                    <li><a href="../../#about" class="nav-link">About</a></li>
+                    <li><a href="../../#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span class="menu-icon"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Song Page Content -->
+    <main class="song-page">
+        <div class="song-page-container">
+
+            <!-- Back Link -->
+            <a href="../../#music" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+                Back to Releases
+            </a>
+
+            <!-- Song Hero -->
+            <div class="song-hero">
+                <div class="song-hero-cover">
+                    <img src="../../assets/covers/butterfly.jpg" alt="Butterfly — Cover Art">
+                </div>
+                <div class="song-hero-info">
+                    <p class="song-hero-label">Single</p>
+                    <h1 class="song-hero-title">Butterfly</h1>
+                    <p class="song-hero-artist">Ravynix</p>
+                    <p class="song-hero-meta">2026 • Electronic / Dance</p>
+
+                    <div class="song-hero-platforms">
+                        <a href="javascript:void(0)" class="platform-link"
+                            aria-label="Listen on Spotify" title="Coming Soon">
+                            <img src="../../assets/icons/spotify.png" alt="Spotify" class="platform-icon">
+                        </a>
+                        <a href="javascript:void(0)"
+                            class="platform-link" aria-label="Listen on YouTube Music" title="Coming Soon">
+                            <img src="../../assets/icons/youtube-music.png" alt="YouTube Music" class="platform-icon">
+                        </a>
+                        <a href="javascript:void(0)"
+                            class="platform-link" aria-label="Listen on SoundCloud" title="Coming Soon">
+                            <img src="../../assets/icons/soundcloud.png" alt="SoundCloud" class="platform-icon">
+                        </a>
+                        <a href="javascript:void(0)" class="platform-link"
+                            aria-label="Listen on Deezer" title="Coming Soon">
+                            <img src="../../assets/icons/deezer.svg" alt="Deezer" class="platform-icon">
+                        </a>
+                        <span style="font-size: var(--font-size-xs); color: var(--color-text-tertiary); display: flex; align-items: center;">Links coming soon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio Player -->
+            <div class="song-player" id="song-player">
+                <audio id="audio-player" preload="metadata">
+                    <source src="../../assets/audio/butterfly.mp3" type="audio/mpeg">
+                </audio>
+                <div class="song-player-controls">
+                    <button class="song-play-button" aria-label="Play">
+                        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                        <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                        </svg>
+                    </button>
+                    <div class="song-player-progress">
+                        <div class="song-progress-bar">
+                            <div class="song-progress-filled"></div>
+                        </div>
+                        <div class="song-player-time">
+                            <span class="song-time-current">0:00</span>
+                            <span class="song-time-duration">0:00</span>
+                        </div>
+                    </div>
+                    <div class="song-player-volume">
+                        <button class="song-volume-button" aria-label="Mute">
+                            <svg class="volume-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                            </svg>
+                            <svg class="mute-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+                            </svg>
+                        </button>
+                        <input type="range" class="song-volume-slider" min="0" max="1" step="0.1" value="1"
+                            aria-label="Volume">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <section class="song-description">
+                <h2>About This Track</h2>
+                <p>Butterfly is a fresh electronic release by Ravynix.</p>
+
+                <div class="song-tags">
+                    <span class="song-tag">Electronic</span>
+                    <span class="song-tag">Dance</span>
+                </div>
+            </section>
+
+            <!-- Press Contact -->
+             <!--
+            <div class="press-contact">
+                <p>For press inquiries:</p>
+                <a href="mailto:evgeniyhrinyuk@gmail.com">evgeniyhrinyuk@gmail.com</a>
+            </div>
+            -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-social">
+                <a href="https://open.spotify.com/artist/4QpTNRjnep7hWPf46aBY6A" class="social-link"
+                    aria-label="Spotify" title="Spotify" target="_blank" rel="noopener">
+                    <img src="../../assets/icons/spotify.png" alt="Spotify" class="social-icon">
+                </a>
+                <a href="https://music.youtube.com/channel/UCqXaMrhbLgI2hamLLG_idbw" class="social-link youtube-link"
+                    aria-label="YouTube Music" title="YouTube Music" target="_blank" rel="noopener">
+                    <img src="../../assets/icons/youtube-music.png" alt="YouTube Music" class="social-icon">
+                </a>
+                <a href="https://www.instagram.com/ravynix_music?igsh=MWNpZHd0ZGV5Nm80dQ==" class="social-link"
+                    aria-label="Instagram" target="_blank" rel="noopener">
+                    <img src="../../assets/icons/instagram.png" alt="Instagram" class="social-icon">
+                </a>
+                <a href="https://www.tiktok.com/@ravynix_music?_r=1&_t=ZS-93J6O2OGV7c" class="social-link"
+                    aria-label="TikTok" target="_blank" rel="noopener">
+                    <img src="../../assets/icons/tiktok.png" alt="TikTok" class="social-icon">
+                </a>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2026 Ravynix. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        // Custom script for single song page audio player interaction
+        document.addEventListener('DOMContentLoaded', () => {
+            const audioPlayer = document.getElementById('audio-player');
+            const playButton = document.querySelector('.song-play-button');
+            const progress = document.querySelector('.song-progress-bar');
+            const progressFilled = document.querySelector('.song-progress-filled');
+            const timeCurrent = document.querySelector('.song-time-current');
+            const timeDuration = document.querySelector('.song-time-duration');
+            const volumeButton = document.querySelector('.song-volume-button');
+            const volumeSlider = document.querySelector('.song-volume-slider');
+            const songPlayer = document.getElementById('song-player');
+
+            // --- Formatting Time ---
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const s = Math.floor(seconds % 60);
+                return `${minutes}:${s < 10 ? '0' : ''}${s}`;
+            }
+
+            // --- Toggle Play/Pause ---
+            function togglePlay() {
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                    songPlayer.classList.add('is-playing');
+                } else {
+                    audioPlayer.pause();
+                    songPlayer.classList.remove('is-playing');
+                }
+            }
+
+            playButton.addEventListener('click', togglePlay);
+
+            // --- Update Progress Bar ---
+            audioPlayer.addEventListener('timeupdate', () => {
+                const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+                progressFilled.style.width = `${percent}%`;
+                timeCurrent.textContent = formatTime(audioPlayer.currentTime);
+            });
+
+            // --- Set Duration ---
+            audioPlayer.addEventListener('loadedmetadata', () => {
+                timeDuration.textContent = formatTime(audioPlayer.duration);
+            });
+
+            // --- Scrubbing ---
+            function scrub(e) {
+                const scrubTime = (e.offsetX / progress.offsetWidth) * audioPlayer.duration;
+                audioPlayer.currentTime = scrubTime;
+            }
+
+            let mousedown = false;
+            progress.addEventListener('click', scrub);
+            progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
+            progress.addEventListener('mousedown', () => mousedown = true);
+            progress.addEventListener('mouseup', () => mousedown = false);
+
+            // --- Volume Control ---
+            // Set initial volume from slider
+            audioPlayer.volume = volumeSlider.value;
+
+            function updateVolume() {
+                audioPlayer.volume = this.value;
+                if (audioPlayer.volume === 0) {
+                    volumeButton.classList.add('is-muted');
+                } else {
+                    volumeButton.classList.remove('is-muted');
+                }
+            }
+
+            volumeSlider.addEventListener('change', updateVolume);
+            volumeSlider.addEventListener('mousemove', updateVolume);
+
+            // Toggle Mute
+            let lastVolume = 1;
+            volumeButton.addEventListener('click', () => {
+                if (audioPlayer.volume > 0) {
+                    lastVolume = audioPlayer.volume;
+                    audioPlayer.volume = 0;
+                    volumeSlider.value = 0;
+                    volumeButton.classList.add('is-muted');
+                } else {
+                    audioPlayer.volume = lastVolume;
+                    volumeSlider.value = lastVolume;
+                    volumeButton.classList.remove('is-muted');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
