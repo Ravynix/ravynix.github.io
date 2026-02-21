@@ -4,15 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Butterfly — A new track by Ravynix. Listen now.">
+    <meta name="description" content="Butterfly — A new track by Ravynix. Listen now.">
     <meta name="keywords" content="Ravynix, Butterfly, electronic, music, new release">
     <meta name="author" content="Yevhenii">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Butterfly — Ravynix">
-    <meta property="og:description"
-        content="Listen to the new track 'Butterfly' by Ravynix.">
+    <meta property="og:description" content="Listen to the new track 'Butterfly' by Ravynix.">
     <meta property="og:type" content="music.song">
     <meta property="og:url" content="https://ravynix.com/music/butterfly/">
     <meta property="og:image" content="https://ravynix.com/assets/covers/butterfly.jpg">
@@ -708,23 +706,25 @@
                     <p class="song-hero-meta">2026 • Electronic / Dance</p>
 
                     <div class="song-hero-platforms">
-                        <a href="javascript:void(0)" class="platform-link"
-                            aria-label="Listen on Spotify" title="Coming Soon">
+                        <a href="javascript:void(0)" class="platform-link" aria-label="Listen on Spotify"
+                            title="Coming Soon">
                             <img src="../../assets/icons/spotify.png" alt="Spotify" class="platform-icon">
                         </a>
-                        <a href="javascript:void(0)"
-                            class="platform-link" aria-label="Listen on YouTube Music" title="Coming Soon">
+                        <a href="javascript:void(0)" class="platform-link" aria-label="Listen on YouTube Music"
+                            title="Coming Soon">
                             <img src="../../assets/icons/youtube-music.png" alt="YouTube Music" class="platform-icon">
                         </a>
-                        <a href="javascript:void(0)"
-                            class="platform-link" aria-label="Listen on SoundCloud" title="Coming Soon">
+                        <a href="javascript:void(0)" class="platform-link" aria-label="Listen on SoundCloud"
+                            title="Coming Soon">
                             <img src="../../assets/icons/soundcloud.png" alt="SoundCloud" class="platform-icon">
                         </a>
-                        <a href="javascript:void(0)" class="platform-link"
-                            aria-label="Listen on Deezer" title="Coming Soon">
+                        <a href="javascript:void(0)" class="platform-link" aria-label="Listen on Deezer"
+                            title="Coming Soon">
                             <img src="../../assets/icons/deezer.svg" alt="Deezer" class="platform-icon">
                         </a>
-                        <span style="font-size: var(--font-size-xs); color: var(--color-text-tertiary); display: flex; align-items: center;">Links coming soon</span>
+                        <span
+                            style="font-size: var(--font-size-xs); color: var(--color-text-tertiary); display: flex; align-items: center;">Links
+                            coming soon</span>
                     </div>
                 </div>
             </div>
@@ -772,16 +772,60 @@
             <!-- Description -->
             <section class="song-description">
                 <h2>About This Track</h2>
-                <p>Butterfly is a fresh electronic release by Ravynix.</p>
+                <p>“Neon Butterflies” is a melodic vocal deep house track blending a dreamy topline with chilled house
+                    grooves and atmospheric production. The track follows glowing metaphors — “Neon butterflies light
+                    the sky” — set against a midnight city backdrop. It’s soft but catchy, designed for chill
+                    dancefloors, rooftop evenings, and late-night playlists. Fits Deep House, Lounge Club, and Chill EDM
+                    lanes.</p>
 
                 <div class="song-tags">
-                    <span class="song-tag">Electronic</span>
-                    <span class="song-tag">Dance</span>
+                    <span class="song-tag">Deep House</span>
+                    <span class="song-tag">Lounge Club</span>
+                    <span class="song-tag">Chill EDM</span>
+                </div>
+            </section>
+
+            <!-- Lyrics -->
+            <section class="lyrics-section">
+                <button class="lyrics-toggle" aria-expanded="false" aria-controls="lyrics-content">
+                    <h2>Lyrics</h2>
+                    <svg class="lyrics-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </button>
+
+                <div class="lyrics-content" id="lyrics-content">
+                    <p class="lyrics-section-label">Verse 1</p>
+                    <pre>Neon wings in the midnight air
+Glowing dreams caught everywhere
+They flutter fast, they never care</pre>
+
+                    <p class="lyrics-section-label">Chorus</p>
+                    <pre>Neon butterflies light the sky
+They flicker once, then say goodbye
+Catch 'em quick or watch them fly
+Neon butterflies, oh my, oh my</pre>
+
+                    <p class="lyrics-section-label">Verse 2</p>
+                    <pre>City streets hum a glowing tune
+Lanterns dance beneath the moon
+Shadows chase the fading bloom</pre>
+
+                    <p class="lyrics-section-label">Pre-Chorus</p>
+                    <pre>Hold your breath, hold it tight
+They wanish into the night</pre>
+
+                    <p class="lyrics-section-label">Chorus</p>
+                    <pre>Neon butterflies light the sky
+They flicker once, then say goodbye
+Catch 'em quick or watch them fly
+Neon butterflies, oh my, oh my</pre>
                 </div>
             </section>
 
             <!-- Press Contact -->
-             <!--
+            <!--
             <div class="press-contact">
                 <p>For press inquiries:</p>
                 <a href="mailto:evgeniyhrinyuk@gmail.com">evgeniyhrinyuk@gmail.com</a>
@@ -905,6 +949,18 @@
                     volumeButton.classList.remove('is-muted');
                 }
             });
+
+            // Lyrics toggle
+            const lyricsToggle = document.querySelector('.lyrics-toggle');
+            const lyricsContent = document.querySelector('.lyrics-content');
+
+            if (lyricsToggle && lyricsContent) {
+                lyricsToggle.addEventListener('click', () => {
+                    const isExpanded = lyricsToggle.getAttribute('aria-expanded') === 'true';
+                    lyricsToggle.setAttribute('aria-expanded', !isExpanded);
+                    lyricsContent.classList.toggle('is-visible', !isExpanded);
+                });
+            }
         });
     </script>
 </body>

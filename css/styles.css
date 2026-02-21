@@ -323,7 +323,6 @@ button {
 
 .song-card:hover {
     background-color: var(--color-bg-elevated);
-    transform: translateY(-2px);
 }
 
 .song-card:hover .song-cover img {
